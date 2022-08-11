@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+    <title th:text="${add} ? 'Create a Karyawan' : 'Edit a Karyawan'"></title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+    <h1 th:text="${add} ? 'Create a Karyawan:' : 'Edit a Karyawan:'"></h1>
+    <a th:href="@{/v1/view/karyawan/list}">Back to Karyawan List</a>
+    <br/><br/>
+    <form th:action="${add} ? @{/v1/view/karyawan/add} : @{/v1/view/karyawan/{karyawanid}/edit(karyawanid=${karyawan.id})}"
+          th:object="${karyawan}" method="POST">
+      <table border="0">
+          <tr>
+              <td>ID</td>
+              <td>:</td>
+              <td><input type="text" th:field="*{id}" /></td>
+          </tr>
+        <tr>
+          <td>Nama</td>
+          <td>:</td>
+          <td><input type="text" th:field="*{nama}" /></td>
+        </tr>
+        <tr>
+          <td>Jenis Kelamin</td>
+          <td>:</td>
+          <td><input type="text" th:field="*{jk}" /></td>
+        </tr>
+        <tr>
+          <td>Umur</td>
+          <td>:</td>
+          <td><input type="text" th:field="*{umur}" /></td>
+        </tr>
+        <tr>
+          <td>Alamat</td>
+          <td>:</td>
+          <td><input type="text" th:field="*{alamat}"/></td>
+        </tr>
+      </table>
+      <input type="submit" th:value="${add} ? 'Create' : 'Update'" />
+    </form>
+
+    <br/>
+<!-- Check if errorMessage is not null and not empty -->
+    <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
+</body>
+</html>
